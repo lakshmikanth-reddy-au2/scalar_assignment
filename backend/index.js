@@ -1,6 +1,19 @@
 const express = require('express');
 var app = express();
+app.use(express.json())
+app.use(function (req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Methods", "GET, PUT, POST, DELETE, OPTIONS, HEAD");
+  res.header("Access-Control-Expose-Headers", "X-TOTAL-COUNT");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization,X-TOTAL-COUNT, X-auth-token, accept-language");
 
+  // if (req.url.substr(-1) === '/') {
+  //     return res.send({
+  //         message: "Welcome!!"
+  //     });
+  // }
+  next();
+});
 app.get('/keywords', (req, res) => {
     let arr = [
         {
